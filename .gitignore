@@ -1,0 +1,22 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Secrets — never commit
+.env
+.env.local
+.env.production
+.env.*.local
+
+# Vite cache
+.vite/
+
+# Test coverage
+coverage/
+
+# Editor / OS
+.DS_Store
+Thumbs.db
+*.log
