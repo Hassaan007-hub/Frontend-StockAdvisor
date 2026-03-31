@@ -115,7 +115,7 @@ VITE_Developer_LinkedIn="https://linkedin.com/in/yourprofile"
 1. Push to GitHub
 2. Import the repo in Vercel, set **Root Directory** to `Frontend_StockAdvisor`
 3. Add environment variables in Vercel project settings:
-   - `VITE_API_URL` → your Hugging Face Space URL e.g. `https://hassaan007-agent-stock-advisor.hf.space`
+   - `VITE_API_URL` → your Hugging Face Space URL
    - `VITE_API_KEY` → same secret key as the backend
    - `VITE_Developer_Name`, `VITE_Developer_Email`, `VITE_Developer_LinkedIn`
 4. Deploy — Vercel auto-detects Vite
