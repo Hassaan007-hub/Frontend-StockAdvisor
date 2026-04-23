@@ -35,27 +35,34 @@ const STOCK_TOOLS = new Set(['buy_sell_signal', 'analyze_stock', 'trend_outlook'
 export default function App() {
   const [dashboardData, setDashboardData] = useState(null)
   const [compareData, setCompareData] = useState(null)
+  const [dashboardError, setDashboardError] = useState(null)
 
   const handleToolResult = async (tool, data) => {
     if (tool === 'compare_stocks' && data?.stocks) {
       setDashboardData(null)
+      setDashboardError(null)
       setCompareData({ stocks: data.stocks })
     } else if (STOCK_TOOLS.has(tool) && data?.ticker) {
       setCompareData(null)
+      setDashboardError(null)
       try {
         const result = await getStockDashboard(data.ticker)
         setDashboardData(result)
-      } catch {
+      } catch (err) {
+        const msg = err?.response?.data?.detail || 'Market data is temporarily unavailable. Try again in a moment.'
         setDashboardData(null)
+        setDashboardError(msg)
       }
     } else {
       setDashboardData(null)
+      setDashboardError(null)
       setCompareData(null)
     }
   }
 
   const handleShowMarket = () => {
     setDashboardData(null)
+    setDashboardError(null)
     setCompareData(null)
   }
 
@@ -69,7 +76,7 @@ export default function App() {
 
         {/* Right: Dashboard — 60% on desktop */}
         <div className="w-full md:w-3/5 overflow-y-auto">
-          <DashboardPanel dashboardData={dashboardData} compareData={compareData} />
+          <DashboardPanel dashboardData={dashboardData} compareData={compareData} dashboardError={dashboardError} />
         </div>
       </div>
       <Footer />
